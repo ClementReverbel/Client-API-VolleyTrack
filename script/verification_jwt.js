@@ -6,7 +6,7 @@ const ressource = 'authapi.php'
 const jwt = localStorage.getItem('jwt');
 
 //Récupérer le jeton en fonction du login, mot de passe
-function getJwt() {
+function verifJWT() {
 
     //Permet de créer tout le corps de le requête
     const requestOptions = {
@@ -18,13 +18,19 @@ function getJwt() {
     fetch(`${baseUrl}${ressource}`,requestOptions)
         .then(response => response.json())
         .then(data=> {
-            displayInfoResponse(document.getElementById('loginResponse'),data);
+            checkJWT(data);
         })
         .catch(error => console.error('Erreur fetch',error));
 }
 
 function checkJWT(info){
-    if(info.status_code!=200){
+    if(info.status_code!="200"){
         window.location.href = '../pages/error.html';
     }
+}
+
+if(jwt){
+    verifJWT();
+} else {
+    window.location.href = '../pages/error.html';
 }

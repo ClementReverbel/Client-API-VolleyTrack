@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../style/style.css"> 
+        <title>Client Match</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Page pour gérer les matchs</h1>
+            <!-- Formulaires pour les opérations CRUD -->
+
+            <!-- GET -->
+            <div class="form-group">
+                <button id="getAll">Afficher tous les matchs</button>
+                <div class="info-response" id="infoGetAll"></div>
+            </div>
+            
+            <!-- GET one -->
+            <div class="form-group">
+                <label for="getID">ID du match:</label>
+                <input type="text" id="ID" placeholder="Entrez l'ID du match">
+                <button id="get">Afficher le match</button>
+                <div class="info-response" id="infoGet"></div>
+            </div>
+            
+            <!-- POST -->
+            <div class="form-group">
+                <label for="new">Nouveau match:</label>
+                <input type="text" id="new" placeholder="Entrez l">
+                <button id="add">Ajouter le match</button>
+                <div class="info-response" id="infoAdd"></div>
+            </div>
+            
+            <!-- PUT -->
+            <div class="form-group">
+                <label for="updateID">ID du match à modifier:</label>
+                <input type="text" id="updateID" placeholder="Entrez l'ID du match à modifier">
+                <label for="updateContent">Nouveau match :</label>
+                <input type="text" id="updateContent" placeholder="Entrez le nouveau contenu du match">
+
+                <!-- Ajout des nouveaux champs -->
+                <label for="updateVote">Vote:</label>
+                <input type="number" id="updateVote" placeholder="Nombre de votes">
+                <label for="updateFaute">Faute de frappe:</label>
+                <input type="checkbox" id="updateFaute">
+                <label for="updateSignalement">Signalement:</label>
+                <input type="checkbox" id="updateSignalement">
+
+                <button id="update">Modifier le match</button>
+                <div class="info-response" id="infoUpdate"></div>
+            </div>
+
+            <!-- DEL -->
+            <div class="form-group">
+                <label for="deleteID">Supprimer le match avec l'ID:</label>
+                <input type="text" id="deletePhraseID" placeholder="Entrez l'ID du match à supprimer">
+                <button id="delete">Supprimer le match</button>
+                <div class="info-response" id="infoDelete"></div>
+            </div>
+            
+            <!-- Zone pour l'affichage des réponses de l'API -->
+            <h2>DONNÉES REÇUES</h2>
+            <div class="response" id="apiResponse" style="display: none;">
+                <table>
+                    <caption>Liste des matchs</caption>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Phrase</th>
+                        <th>Date Ajout</th>
+                        <th>Date Modification</th>
+                        <th>Vote</th>
+                        <th>Faute de Frappe</th>
+                        <th>Signalement</th>
+                    </tr>
+                    </thead>
+                    <tbody id="responseTableBody">
+                        <!-- Les lignes du tableau seront ajoutées ici via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Script JavaScript pour les interactions avec l'API -->
+        <script src="../script/matchs.js"></script>
+    </body>
+</html>
