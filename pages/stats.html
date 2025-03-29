@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../style/style.css"> 
+        <title>Client Joueur</title>
+    </head>
+    <body>
+        <div class="container">
+            
+            <h1>Page pour gérer les joueurs</h1>
+            <!-- Formulaires pour les opérations CRUD -->
+
+            <!-- GET -->
+            <div class="form-group">
+                <label for="actif">Obtenir les statistiques des :</label>
+                <div>
+                    <label for="joueur">Statistiques des joueurs</label>
+                    <input type="radio" id="joueur" name="choixstat" value="stats_joueur" checked>  
+                </div>
+                <div>
+                    <label for="match">Statistiques des matchs</label>
+                    <input type="radio" id="match" name="choixstat" value="stats_match">
+                </div>
+                <button id="getAll">Afficher les stats</button>
+                <div class="info-response" id="infoGetAll"></div>
+            </div>
+            
+            <!-- Zone pour l'affichage des réponses de l'API -->
+            <h2>DONNÉES REÇUES</h2>
+            <div class="response" id="apiResponse" style="display: none;">
+                <table>
+                    <caption>Statistiques des jouers</caption>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Statut</th>
+                        <th>Poste préféré</th>
+                        <th>Total titulaire</th>
+                        <th>Total remplaçant</th>
+                        <th>Moyenne des notes</th>
+                        <th>Pourcentage de victoire</th>
+                        <th>Nombre de sélections consécutives</th>
+                    </tr>
+                    </thead>
+                    <tbody id="responseTableBody">
+                        <!-- Les lignes du tableau seront ajoutées ici via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="response" id="apiResponseMatch" style="display: none;">
+                <table>
+                    <caption>Statistiques des matchs</caption>
+                    <thead>
+                    <tr>
+                        <th>Nombre de match gagnés</th>
+                        <th>Nombre de match perdus</th>
+                        <th>Pourcentage de victoire</th>
+                        <th>Pourcentage de défaite</th>
+                    </tr>
+                    </thead>
+                    <tbody id="responseTableBodyMatch">
+                        <!-- Les lignes du tableau seront ajoutées ici via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Script JavaScript pour les interactions avec l'API -->
+        <script src="../script/stats.js"></script>
+    </body>
+</html>
