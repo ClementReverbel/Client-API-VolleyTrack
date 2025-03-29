@@ -1,0 +1,80 @@
+    <!DOCTYPE html>
+    <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="../style/style.css"> 
+            <title>Client feuille de match</title>
+        </head>
+        <body>
+            <div class="container">
+                
+                <h1>Page pour gérer les feuilles de match</h1>
+
+                <!-- GET one -->
+                <div class="form-group">
+                    <label for="get">Obtenir les joueurs d'une feuille de match :</label>
+                    <input type="text" id="ID" placeholder="Rentrez l'ID du match avec la feuille">
+                    <button id="get">Afficher la feuille de match</button>
+                    <div class="info-response" id="infoGet"></div>
+                </div>
+                
+                <!-- POST -->
+                <div class="form-group">
+                    <label for="new">Nouvelle feuille de match:</label>
+                    <input type="text" id="newid" placeholder="ID du match">
+                    
+                    <div id="players-container"></div>  
+                    <div id="roles-container"></div>    
+
+                    <button id="removePlayer">-</button>
+                    <button id="addPlayer">+</button>
+                    
+                    <button id="add">Ajouter la feuille de match</button>
+                    <div class="info-response" id="infoAdd"></div>
+                </div>
+
+                <!-- PUT -->
+                <div class="form-group">
+                    <label for="updateID">Modifier une feuille de match:</label>
+                    <input type="text" id="updateid" placeholder="ID du match">
+
+                    <div id="update-players-container"></div>  
+                    <div id="update-roles-container"></div>    
+                    <div id="update-notes-container"></div>    
+
+                    <button id="removeUpdatePlayer">-</button>
+                    <button id="addUpdatePlayer">+</button>
+
+                    <button id="update">Modifier la feuille de match</button>
+                    <div class="info-response" id="infoUpdate"></div>
+                </div>
+                
+                <!-- Zone pour l'affichage des réponses de l'API -->
+                <h2>DONNÉES REÇUES</h2>
+                <div class="response" id="apiResponse" style="display: none;">
+                    <table>
+                        <caption>Liste des joueurs</caption>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Numéro de licence</th>
+                            <th>Nom complet</th>
+                            <th>Taille</th>
+                            <th>Poids</th>
+                            <th>Moyenne des notes</th>
+                            <th>Commentaire</th>
+                            <th>Role titulaire ?</th>
+                        </tr>
+                        </thead>
+                        <tbody id="responseTableBody">
+                            <!-- Les lignes du tableau seront ajoutées ici via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Script JavaScript pour les interactions avec l'API -->
+            <script src="../script/feuille.js"></script>
+        </body>
+    </html>
