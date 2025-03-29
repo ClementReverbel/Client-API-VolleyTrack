@@ -8,53 +8,60 @@
     </head>
     <body>
         <div class="container">
+            
             <h1>Page pour gérer les joueurs</h1>
             <!-- Formulaires pour les opérations CRUD -->
 
             <!-- GET -->
             <div class="form-group">
+                <label for="actif">Seulement les joueurs actif ?:</label>
+                <input type="checkbox" id="actif">
                 <button id="getAll">Afficher tous les joueurs</button>
                 <div class="info-response" id="infoGetAll"></div>
             </div>
             
             <!-- GET one -->
             <div class="form-group">
-                <label for="getID">ID du match:</label>
-                <input type="text" id="ID" placeholder="Entrez l'ID du match">
-                <button id="get">Afficher le match</button>
+                <label for="getID">Numéro de licence joueur:</label>
+                <input type="text" id="ID" placeholder="Entrez le numéro de licence">
+                <button id="get">Afficher le joueur</button>
                 <div class="info-response" id="infoGet"></div>
             </div>
             
             <!-- POST -->
             <div class="form-group">
-                <label for="new">Nouveau match:</label>
-                <input type="text" id="newdate" placeholder="Veuillez entrer une date au format 'jour-mois-année'">
-                <input type="text" id="newheure" placeholder="Veuillez entrer une heure au format 'heure:minute'">
-                <input type="text" id="newequipeadv" placeholder="Veuillez entrer le nom de l'équipe adverse">
-                <input type="text" id="newdomicile" placeholder="Veuillez entrer 1 pour domicile et 0 pour non">
-                <button id="add">Ajouter le match</button>
+                <label for="new">Nouveau joueur:</label>
+                <input type="text" id="newnumLic" placeholder="Veuillez entrer un numéro de licence au format : VOL puis 7 chiffre'">
+                <input type="text" id="newnom" placeholder="Veuillez entrer le nom du joueur">
+                <input type="text" id="newprenom" placeholder="Veuillez entrer le prenom du joueur">
+                <input type="text" id="newdatenaissance" placeholder="Veuillez entrer la date de naissance au format 'jour-mois-année'">
+                <input type="text" id="newtaille" placeholder="Veuillez entrer la taille du joueur en mètre">
+                <input type="text" id="newpoids" placeholder="Veuillez entrer le poids du joueur en kg">
+                <input type="text" id="newcommentaire" placeholder="Veuillez entrer le commentaire du joueur">
+                <button id="add">Ajouter le joueur</button>
                 <div class="info-response" id="infoAdd"></div>
             </div>
             
             <!-- PUT -->
             <div class="form-group">
-                <label for="updateID">ID du match à modifier:</label>
-                <input type="text" id="updateID" placeholder="Entrez l'ID du match à modifier">
-                <input type="text" id="updatedate" placeholder="Veuillez entrer une date au format 'jour-mois-année'">
-                <input type="text" id="updateheure" placeholder="Veuillez entrer une heure au format 'heure:minute'">
-                <input type="text" id="updateequipeadv" placeholder="Veuillez entrer le nom de l'équipe adverse">
-                <input type="text" id="updatedomicile" placeholder="Veuillez entrer 1 pour domicile et 0 pour non">
-                <input type="text" id="updatescore" placeholder="Veuillez entrer le score au format : 'notrequipe-autrequipe,...'">
-
-                <button id="update">Modifier le match</button>
+                <label for="updateID">Modifier un joueur:</label>
+                <input type="text" id="updatenumLic" placeholder="Veuillez entrer le numéro de licence du joueur à modifier">
+                <input type="text" id="updatenom" placeholder="Veuillez entrer le nom du joueur">
+                <input type="text" id="updateprenom" placeholder="Veuillez entrer le prenom du joueur">
+                <input type="text" id="updatedatenaissance" placeholder="Veuillez entrer la date de naissance au format 'jour-mois-année'">
+                <input type="text" id="updatetaille" placeholder="Veuillez entrer la taille du joueur en mètre">
+                <input type="text" id="updatepoids" placeholder="Veuillez entrer le poids du joueur en kg">
+                <input type="text" id="updatecommentaire" placeholder="Veuillez entrer le commentaire du joueur">
+                <input type="text" id="updatestatut" placeholder="Veuillez entrer le statut du joueur">
+                <button id="update">Modifier le joueur</button>
                 <div class="info-response" id="infoUpdate"></div>
             </div>
 
             <!-- DEL -->
             <div class="form-group">
-                <label for="deleteID">Supprimer le match avec l'ID:</label>
-                <input type="text" id="deleteID" placeholder="Entrez l'ID du match à supprimer">
-                <button id="delete">Supprimer le match</button>
+                <label for="deleteID">Supprimer le joueur avec le numéro de licence:</label>
+                <input type="text" id="deleteID" placeholder="Entrez le numéro de licence du joueur à supprimer">
+                <button id="delete">Supprimer le joueur</button>
                 <div class="info-response" id="infoDelete"></div>
             </div>
             
@@ -62,15 +69,16 @@
             <h2>DONNÉES REÇUES</h2>
             <div class="response" id="apiResponse" style="display: none;">
                 <table>
-                    <caption>Liste des matchs</caption>
+                    <caption>Liste des joueurs</caption>
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Date & Heure du match</th>
-                        <th>Equipe adverse</th>
-                        <th>A domicile ?</th>
-                        <th>Score</th>
-                        <th>Resultat du match</th>
+                        <th>Numéro de licence</th>
+                        <th>Nom complet</th>
+                        <th>Taille</th>
+                        <th>Poids</th>
+                        <th>Moyenne des notes</th>
+                        <th>Commentaire</th>
                     </tr>
                     </thead>
                     <tbody id="responseTableBody">
@@ -81,6 +89,6 @@
         </div>
 
         <!-- Script JavaScript pour les interactions avec l'API -->
-        <script src="../script/matchs.js"></script>
+        <script src="../script/joueurs.js"></script>
     </body>
 </html>

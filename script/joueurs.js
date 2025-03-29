@@ -1,6 +1,6 @@
 // L'URL de base de l'API
 const baseUrl = 'https://volleyapi.alwaysdata.net/ressources';
-const ressource = '/matchs_endpoint.php'
+const ressource = '/joueurs_endpoint.php'
 
 const jwt = localStorage.getItem('jwt');
 
@@ -10,8 +10,10 @@ function getAll() {
     const requestOptions = {
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwt}` }, // Type de contenu
     };
+
+    var actif = document.getElementById("actif").checked;
     
-    fetch(`${baseUrl}${ressource}`,requestOptions)
+    fetch(`${baseUrl}${ressource}?actif=${actif}`,requestOptions)
         .then(response => response.json())
         .then(data=> {
             displayInfoResponse(document.getElementById('infoGetAll'),data);
@@ -32,7 +34,7 @@ function get() {
         headers: { 'Content-Type': 'application/json',  'Authorization': `Bearer ${jwt}` }, // Type de contenu
     };
         
-    fetch(`${baseUrl}${ressource}?id=${valeurDeLaBalise}`,requestOptions)
+    fetch(`${baseUrl}${ressource}?numLic=${valeurDeLaBalise}`,requestOptions)
         .then(response => response.json())
         .then(data=> {
             displayInfoResponse(document.getElementById('infoGet'),data);
@@ -47,10 +49,13 @@ function get() {
 function add() {
 
     const body = {
-        date: document.getElementById("newdate").value,
-        heure:document.getElementById("newheure").value,
-        equipeadv:document.getElementById("newequipeadv").value,
-        domicile:document.getElementById("newdomicile").value
+        numLic: document.getElementById("newnumLic").value,
+        nom:document.getElementById("newnom").value,
+        prenom:document.getElementById("newprenom").value,
+        date_de_naissance:document.getElementById("newdatenaissance").value,
+        taille:document.getElementById("newtaille").value,
+        poids:document.getElementById("newpoids").value,
+        commentaire:document.getElementById("newcommentaire").value
     };
 
     const requestOptions = {
@@ -75,12 +80,14 @@ function update() {
 
     //METHODE PUT
     const changementData = {
-        id:document.getElementById("updateID").value,
-        date: document.getElementById("updatedate").value,
-        heure:document.getElementById("updateheure").value,
-        equipeadv:document.getElementById("updateequipeadv").value,
-        domicile:document.getElementById("updatedomicile").value,
-        score:document.getElementById("updatescore").value
+        numLic: document.getElementById("updatenumLic").value,
+        nom:document.getElementById("updatenom").value,
+        prenom:document.getElementById("updateprenom").value,
+        date_de_naissance:document.getElementById("updatedatenaissance").value,
+        taille:document.getElementById("updatetaille").value,
+        poids:document.getElementById("updatepoids").value,
+        commentaire:document.getElementById("updatecommentaire").value,
+        statut:document.getElementById("updatestatut").value
     };
     const requestUpdate = {
         method: 'PUT', // Méthode HTTP
@@ -103,7 +110,7 @@ function update() {
 function deleteOne() {
 
     const body = {
-        id: document.getElementById('deleteID').value,
+        numLic: document.getElementById('deleteID').value,
     };
 
     const requestDelete = {
@@ -122,23 +129,24 @@ function deleteOne() {
 }
 
 // Méthode pour afficher les données dans le tableau HTML
-function displayData(matchs) {
+function displayData(joueurs) {
     const tableBody = document.getElementById('responseTableBody');
     tableBody.innerHTML = ''; // nettoie le tableau avant de le remplir
     const apiResponse = document.getElementById('apiResponse');
 
-    matchs = Array.isArray(matchs) ? matchs : [matchs];
+    joueurs = Array.isArray(joueurs) ? joueurs : [joueurs];
 
-    apiResponse.style.display = matchs.length > 0 ? 'block' : 'none';
+    apiResponse.style.display = joueurs.length > 0 ? 'block' : 'none';
 
-    matchs.forEach(match => {
+    joueurs.forEach(joueur => {
         const row = tableBody.insertRow();
-        row.insertCell(0).textContent = match.id;
-        row.insertCell(1).textContent = match.date_heure;
-        row.insertCell(2).textContent = match.equipeadv;
-        row.insertCell(3).textContent = match.domicile;
-        row.insertCell(4).textContent = match.score;
-        row.insertCell(5).textContent = match.gagne;
+        row.insertCell(0).textContent = joueur.idJoueur;
+        row.insertCell(1).textContent = joueur.Numéro_de_licence;
+        row.insertCell(2).textContent = joueur.NomComplet;
+        row.insertCell(3).textContent = joueur.Taille+" m";
+        row.insertCell(4).textContent = joueur.Poids+" kg";
+        row.insertCell(5).textContent = joueur.Moyenne_note+" /5";
+        row.insertCell(6).textContent = joueur.Commentaire;
     });
 }
 
