@@ -8,7 +8,7 @@ const jwt = localStorage.getItem('jwt');
 function getAll() {
 
     const requestOptions = {
-        headers: { 'Authorization': `Bearer ${jwt}` }, // Type de contenu
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwt}` }, // Type de contenu
     };
     
     fetch(`${baseUrl}${ressource}`,requestOptions)
@@ -25,14 +25,14 @@ function getAll() {
 
 // Méthode pour effectuer un appel API GET pour récupérer un seul objet
 function get() {
-    var valeurDeLaBalise = document.getElementById('getID').value;
+    var valeurDeLaBalise = document.getElementById('ID').value;
     
     const requestOptions = {
         method: 'GET', // Méthode HTTP
         headers: { 'Content-Type': 'application/json',  'Authorization': `Bearer ${jwt}` }, // Type de contenu
     };
         
-    fetch(`${baseUrl}${ressource}/?id=${valeurDeLaBalise}`,requestOptions)
+    fetch(`${baseUrl}${ressource}?id=${valeurDeLaBalise}`,requestOptions)
         .then(response => response.json())
         .then(data=> {
             displayInfoResponse(document.getElementById('infoGet'),data);
@@ -47,7 +47,10 @@ function get() {
 function add() {
 
     const body = {
-        phrase: document.getElementById("new").value,
+        date: document.getElementById("newdate").value,
+        heure:document.getElementById("newheure").value,
+        equipeadv:document.getElementById("newequipeadv").value,
+        domicile:document.getElementById("newdomicile").value
     };
 
     const requestOptions = {
@@ -70,18 +73,14 @@ function add() {
 // Méthode pour mettre à jour un objet
 function update() {
 
-    var id = document.getElementById("updateID").value;
-    var phraseUpdate = document.getElementById("updateContent").value;
-    var voteUpdate = document.getElementById("updateVote").value;
-    var fauteUpdate = document.getElementById("updateFaute").checked;
-    var signalementUpdate = document.getElementById("updateSignalement").checked;
-
     //METHODE PUT
     const changementData = {
-        phrase: phraseUpdate,
-        vote: voteUpdate,
-        faute: fauteUpdate,
-        signalement: signalementUpdate
+        id:document.getElementById("updateID").value,
+        date: document.getElementById("updatedate").value,
+        heure:document.getElementById("updateheure").value,
+        equipeadv:document.getElementById("updateequipeadv").value,
+        domicile:document.getElementById("updatedomicile").value,
+        score:document.getElementById("updatescore").value
     };
     const requestUpdate = {
         method: 'PUT', // Méthode HTTP
@@ -89,7 +88,7 @@ function update() {
         body: JSON.stringify(changementData) // Corps de la requête
     };
 
-    fetch(`${baseUrl}${ressource}/${id}`,requestUpdate)
+    fetch(`${baseUrl}${ressource}`,requestUpdate)
         .then(response => response.json())
         .then(data=> {
             displayInfoResponse(document.getElementById('infoUpdate'),data);
@@ -103,45 +102,50 @@ function update() {
 // Méthode pour supprimer un objet
 function deleteOne() {
 
-    var id = document.getElementById("deleteID").value;
+    const body = {
+        id: document.getElementById('deleteID').value,
+    };
 
     const requestDelete = {
         method: 'DELETE', // Méthode HTTP
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${jwt}` }, // Type de contenu
+        body: JSON.stringify(body)
     };
 
-    fetch(`${baseUrl}${ressource}/${id}`,requestDelete)
+    fetch(`${baseUrl}${ressource}`,requestDelete)
             .then(response => response.json())
             .then(data=> {
-                displayInfoResponse(document.getElementById('infoDelete'),data);
+                displayInfoResponse(document.getElementById('infoDelete'),data );
             })
             .catch(error => console.error('Erreur fetch',error)
         );
 }
 
 // Méthode pour afficher les données dans le tableau HTML
-function displayData(phrases) {
+function displayData(matchs) {
     const tableBody = document.getElementById('responseTableBody');
     tableBody.innerHTML = ''; // nettoie le tableau avant de le remplir
     const apiResponse = document.getElementById('apiResponse');
-    apiResponse.style.display = phrases.length > 0 ? 'block' : 'none';
 
-    phrases.forEach(phrase => {
+    matchs = Array.isArray(matchs) ? matchs : [matchs];
+
+    apiResponse.style.display = matchs.length > 0 ? 'block' : 'none';
+
+    matchs.forEach(match => {
         const row = tableBody.insertRow();
-        row.insertCell(0).textContent = phrase.id;
-        row.insertCell(1).textContent = phrase.phrase;
-        row.insertCell(2).textContent = phrase.date_ajout;
-        row.insertCell(3).textContent = phrase.date_modif;
-        row.insertCell(4).textContent = phrase.vote;
-        row.insertCell(5).textContent = phrase.faute;
-        row.insertCell(6).textContent = phrase.signalement;
+        row.insertCell(0).textContent = match.id;
+        row.insertCell(1).textContent = match.date_heure;
+        row.insertCell(2).textContent = match.equipeadv;
+        row.insertCell(3).textContent = match.domicile;
+        row.insertCell(4).textContent = match.score;
+        row.insertCell(5).textContent = match.gagne;
     });
 }
 
 // Mise à jour de la fonction pour afficher les informations de réponse
 function displayInfoResponse(baliseInfo,info) {
     if(info) {
-        baliseInfo.textContent = `Statut: ${info.status}, Code: ${info.status_code}, Message: ${info.status_message}`;
+        baliseInfo.textContent = `Code HTTP: ${info.status_code}, Message: ${info.status_message}`;
         baliseInfo.style.display = 'block';
     } else {
         baliseInfo.style.display = 'none';
