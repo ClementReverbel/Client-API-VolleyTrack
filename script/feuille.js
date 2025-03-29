@@ -2,8 +2,6 @@
 const baseUrl = 'https://volleyapi.alwaysdata.net/ressources';
 const ressource = '/feuillematch_endpoint.php'
 
-const jwt = localStorage.getItem('jwt');
-
 
 // Méthode pour effectuer un appel API GET pour récupérer un seul objet
 function get() {

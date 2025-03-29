@@ -2,8 +2,6 @@
 const baseUrl = 'https://volleyapi.alwaysdata.net/ressources';
 const ressource = '/joueurs_endpoint.php'
 
-const jwt = localStorage.getItem('jwt');
-
 // Méthode pour effectuer un appel API GET pour récupérer tous les objets
 function getAll() {
 

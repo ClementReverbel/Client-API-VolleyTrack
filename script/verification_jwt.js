@@ -1,7 +1,4 @@
 
-// L'URL de base de l'API
-const baseUrl = 'https://authapi.alwaysdata.net/';
-const ressource = 'authapi.php'
 
 const jwt = localStorage.getItem('jwt');
 
@@ -15,7 +12,7 @@ function verifJWT() {
     };
 
     //Envoie la requête à l'URL spécifié
-    fetch(`${baseUrl}${ressource}`,requestOptions)
+    fetch('https://authapi.alwaysdata.net/authapi.php',requestOptions)
         .then(response => response.json())
         .then(data=> {
             checkJWT(data);
