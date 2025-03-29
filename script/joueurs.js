@@ -50,7 +50,7 @@ function add() {
         date: document.getElementById("newdate").value,
         heure:document.getElementById("newheure").value,
         equipeadv:document.getElementById("newequipeadv").value,
-        domicile:document.getElementById("newdomicile").checked
+        domicile:document.getElementById("newdomicile").value
     };
 
     const requestOptions = {
@@ -79,7 +79,7 @@ function update() {
         date: document.getElementById("updatedate").value,
         heure:document.getElementById("updateheure").value,
         equipeadv:document.getElementById("updateequipeadv").value,
-        domicile:document.getElementById("updatedomicile").checked,
+        domicile:document.getElementById("updatedomicile").value,
         score:document.getElementById("updatescore").value
     };
     const requestUpdate = {

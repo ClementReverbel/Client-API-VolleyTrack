@@ -4,16 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../style/style.css"> 
-        <title>Client Match</title>
+        <title>Client Joueur</title>
     </head>
     <body>
         <div class="container">
-            <h1>Page pour gérer les matchs</h1>
+            <h1>Page pour gérer les joueurs</h1>
             <!-- Formulaires pour les opérations CRUD -->
 
             <!-- GET -->
             <div class="form-group">
-                <button id="getAll">Afficher tous les matchs</button>
+                <button id="getAll">Afficher tous les joueurs</button>
                 <div class="info-response" id="infoGetAll"></div>
             </div>
             
@@ -31,8 +31,7 @@
                 <input type="text" id="newdate" placeholder="Veuillez entrer une date au format 'jour-mois-année'">
                 <input type="text" id="newheure" placeholder="Veuillez entrer une heure au format 'heure:minute'">
                 <input type="text" id="newequipeadv" placeholder="Veuillez entrer le nom de l'équipe adverse">
-                <label for="newdom">A domicile ?:</label>
-                <input type="checkbox" id="newdomicile">
+                <input type="text" id="newdomicile" placeholder="Veuillez entrer 1 pour domicile et 0 pour non">
                 <button id="add">Ajouter le match</button>
                 <div class="info-response" id="infoAdd"></div>
             </div>
@@ -44,8 +43,7 @@
                 <input type="text" id="updatedate" placeholder="Veuillez entrer une date au format 'jour-mois-année'">
                 <input type="text" id="updateheure" placeholder="Veuillez entrer une heure au format 'heure:minute'">
                 <input type="text" id="updateequipeadv" placeholder="Veuillez entrer le nom de l'équipe adverse">
-                <label for="newdom">A domicile ?:</label>
-                <input type="checkbox" id="updatedomicile">
+                <input type="text" id="updatedomicile" placeholder="Veuillez entrer 1 pour domicile et 0 pour non">
                 <input type="text" id="updatescore" placeholder="Veuillez entrer le score au format : 'notrequipe-autrequipe,...'">
 
                 <button id="update">Modifier le match</button>
